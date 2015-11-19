@@ -42,13 +42,14 @@ public class PaymentGatewayTransactionResource {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
-    @Path("/getAccountStatus/{idUser}/{password}/{accountNumber}")
+    @Path("/getAccountStatus/{idUser}/{password}/{accountNumber}/{verificationNumber}/{year}/{month}")
     public Response getAccountStatus(@PathParam("idUser") String idUser, @PathParam("password") String password 
-          , @PathParam("accountNumber") Long accountNumber) {
+          , @PathParam("accountNumber") Long accountNumber, @PathParam("verificationNumber") Long verificationNumber
+          , @PathParam("year") Integer year, @PathParam("month") Integer month) {
          Response response = null;
          try {
              response = Response.status(Response.Status.OK)
-                     .entity(accountHolder.getAccountStatus(idUser, password, accountNumber))
+                     .entity(accountHolder.getAccountStatus(idUser, password, accountNumber, verificationNumber, year, month))
                      .build();
          }catch(Exception e){
              response = Response.status(Response.Status.OK)
@@ -70,13 +71,14 @@ public class PaymentGatewayTransactionResource {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
-    @Path("/doPayment/{idUser}/{password}/{accountNumber}/{amount}")
+    @Path("/doPayment/{idUser}/{password}/{accountNumber}/{verificationNumber}/{year}/{month}/{amount}")
     public Response doPayment(@PathParam("idUser") String idUser, @PathParam("password") String password 
-          , @PathParam("accountNumber") Long accountNumber, @PathParam("amount") Double amount) {
+          , @PathParam("accountNumber") Long accountNumber, @PathParam("verificationNumber") Long verificationNumber
+          , @PathParam("year") Integer year, @PathParam("month") Integer month, @PathParam("amount") Double amount) {
          Response response = null;
          try {
              response = Response.status(Response.Status.OK)
-                     .entity(accountHolder.executeTransaction(idUser, password, accountNumber, amount,DISCOUNT))
+                     .entity(accountHolder.executeTransaction(idUser, password, accountNumber, verificationNumber, year, month, amount, DISCOUNT))
                      .build();
          }catch(Exception e){
              response = Response.status(Response.Status.OK)
@@ -97,13 +99,14 @@ public class PaymentGatewayTransactionResource {
      */
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_HTML})
-    @Path("/doDeposit/{idUser}/{password}/{accountNumber}/{amount}")
+    @Path("/doDeposit/{idUser}/{password}/{accountNumber}/{verificationNumber}/{year}/{month}/{amount}")
     public Response doDeposit(@PathParam("idUser") String idUser, @PathParam("password") String password 
-          , @PathParam("accountNumber") Long accountNumber, @PathParam("amount") Double amount) {
+          , @PathParam("accountNumber") Long accountNumber, @PathParam("verificationNumber") Long verificationNumber
+          , @PathParam("year") Integer year, @PathParam("month") Integer month, @PathParam("amount") Double amount) {
          Response response = null;
          try {
              response = Response.status(Response.Status.OK)
-                     .entity(accountHolder.executeTransaction(idUser, password, accountNumber, amount,DEPOSIT))
+                     .entity(accountHolder.executeTransaction(idUser, password, accountNumber, verificationNumber, year, month, amount, DEPOSIT))
                      .build();
          }catch(Exception e){
              response = Response.status(Response.Status.OK)

@@ -18,14 +18,21 @@ public class Account implements Serializable{
     private Boolean isValid; 
     private Double amount; 
     private Double debt; 
-    
+    private Long verificationNumber;
+    private Integer year;
+    private Integer month;
 
-    public Account(Long accountNumber, Boolean isValid, Double amount, Double debt) {
+    public Account(Long accountNumber, Boolean isValid, Double amount, Double debt, Long verificationNumber, Integer year, Integer month) {
         this.accountNumber = accountNumber;
         this.isValid = isValid;
         this.amount = amount;
         this.debt = debt;
+        this.verificationNumber = verificationNumber;
+        this.year = year;
+        this.month = month;
     }
+
+
     
      public Long getAccountNumber() {
         return accountNumber;
@@ -57,6 +64,30 @@ public class Account implements Serializable{
 
     public void setDebt(Double debt) {
         this.debt = debt;
+    }
+    
+    public Long getVerificationNumber() {
+        return verificationNumber;
+    }
+
+    public void setVerificationNumber(Long verificationNumber) {
+        this.verificationNumber = verificationNumber;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
     }
     
     @Override
@@ -94,5 +125,7 @@ public class Account implements Serializable{
        
        return StaticAccountHolder.mapError(StaticAccountHolder.INVALID_ACCOUNT);
     }
+
+    
     
 }

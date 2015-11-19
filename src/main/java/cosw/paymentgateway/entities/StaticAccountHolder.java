@@ -30,22 +30,23 @@ public class StaticAccountHolder {
     
     public StaticAccountHolder (){
         accountHolder= new HashMap<String,Account>();
-        accountHolder.put("(102564665,abcdefgh,13245)"
-                , new Account(13245l, Boolean.TRUE, 13501574d, 1E6));
-        accountHolder.put("(12379899,cosW2015,13246)"
-                , new Account(13246l, Boolean.TRUE, 10000000d, 9000000d));
-        accountHolder.put("(123456789,contrasena12,12347)"
-                , new Account(13247l, Boolean.TRUE, 5000000d, 400000d));
-        accountHolder.put("(102564665,sinSaldo,24564)"
-                , new Account(24564l, Boolean.TRUE, 0d, 0d));
-        accountHolder.put("(123456789,saldoInfinito,11111)"
-                , new Account(11111l, Boolean.TRUE, Double.MAX_VALUE, 0d));
-        accountHolder.put("(102502315,inactiva145,123450)"
-                , new Account(132450l, Boolean.FALSE, 0d, 0d));
+        accountHolder.put("(102564665,abcdefgh,13245,111,2017,3)"
+                , new Account(13245l, Boolean.TRUE, 13501574d, 1E6,111l,2017,3));
+        accountHolder.put("(12379899,cosW2015,13246,123,2016,1)"
+                , new Account(13246l, Boolean.TRUE, 10000000d, 9000000d,123l,2016,1));
+        accountHolder.put("(123456789,contrasena12,12347,132,2016,1)"
+                , new Account(13247l, Boolean.TRUE, 5000000d, 400000d,132l,2016,1));
+        accountHolder.put("(102564665,sinSaldo,24564,555,2016,2)"
+                , new Account(24564l, Boolean.TRUE, 0d, 0d,555l,2016,2));
+        accountHolder.put("(123456789,saldoInfinito,11111,666,2016,3)"
+                , new Account(11111l, Boolean.TRUE, Double.MAX_VALUE, 0d,666l,2016,3));
+        accountHolder.put("(102502315,inactiva145,123450,543,2016,10)"
+                , new Account(132450l, Boolean.FALSE, 0d, 0d,543l,2016,10));
      }
     
-    public String getAccountStatus(String user, String password, Long accountNumber) throws Exception{
-        String key = "("+user+","+password+","+accountNumber+")";
+    public String getAccountStatus(String user, String password, Long accountNumber,Long verificationNumber
+            , Integer year, Integer month ) throws Exception{
+        String key = "("+user+","+password+","+accountNumber+","+verificationNumber+","+year+","+month+")";
         
         if(accountHolder.containsKey(key)){
            return accountHolder.get(key).toString();
@@ -54,8 +55,9 @@ public class StaticAccountHolder {
         }
     }
     
-    public String executeTransaction(String user, String password, Long accountNumber,Double amount,Integer operation) throws Exception{
-        String key = "("+user+","+password+","+accountNumber+")";
+    public String executeTransaction(String user, String password, Long accountNumber,Long verificationNumber
+            , Integer year, Integer month,Double amount,Integer operation) throws Exception{
+        String key = "("+user+","+password+","+accountNumber+","+verificationNumber+","+year+","+month+")";
         switch (operation){
             case 1: 
                 return discount(key,amount);
